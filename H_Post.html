@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_blank">
+    <?!= getCSS() ?>
+    
+  </head>
+  <body>
+    <div id="idContent" style="marginLeft:20px;">
+      <h1>Welcome to Apps Script World</h1>
+      <p style="background:cyan;padding:12px;">
+        You want interesting, usable and valuable information, and you want it fast.  Well, . . maybe you don't want that, 
+        I don't know, but that's what I want.  It's impossible to know everything about programming, the web and products.  
+        If you know something valuable, think about posting it here.   You can make a Post, by scrolling down to the "Make a Post" section.
+        To make a post, you must approve an Apps Script Web App embeded in this site.  The Web App only asks you to approve one Permission,
+        to make an external request.  That's it!  You are not giving the form permission to any other services, or access to your account, 
+        so all it can do is send out what you input into the Form.  It does also get your account email address so that people can't 
+        anonymously post spam.  The only reason for that external request permission, is write your Post to a spreadsheet.  Just choose a topic,
+        and make a post.  And if you don't see a topic listed that you want, make a post in the Comments section of the group, 
+        asking for a new topic.    Scroll Down and you'll see the "Topics" page.  
+        The Topics page shows all the topic categories that may be of interest to you.  You can browse for information by category.  
+        There is no limit to the number of topics that can be created in the database (spreadsheet).   
+        So, make a post, or look for information.  To make a post, scroll down to the Post page.  You'll see an input form.
+      </p>
+    
+      <h1>Information Categories</h1>
+      <div>
+        <?!= makeListOfSS('table') ?>
+      </div>
+    
+    <h1>Make a Post to a Category</h1>
+    
+      <div>Your Account: <?!= theAcct() ?></div>
+      <br/>
+      
+      <label for="whichSS">Which Category</label>
+      <br/>
+        <select id="whichSS">
+          <option value="">Choose a Spreadsheet</option>
+          <?!= makeListOfSS() ?>
+        </select>
+
+      <br/>
+      <br/>
+    
+      <label>Your Post</label>
+      <br/>
+      <textArea id="idPost" rows="6" style="width:95%;"></textArea>
+    
+      <br/>
+      <br/>
+    
+      <label>Link</label>
+      <br/>
+      <input type="text" id="idLink">
+    
+      <br/>
+      <br/>
+    
+      <label>Key Words</label>
+      <br/>
+      <input type="text" id="idKeyWords">
+    
+      <br/>
+      <br/>
+    
+      <button onclick="postToSheet()">Post to Spreadsheet</button>
+    
+      <br/>
+      <br/>
+    </div>
+    
+    <div id="idReducedView" style="display:none">
+      <button onclick="showInput()">Show Input</button>
+      <br/>
+      <br/>
+    </div>
+    
+    <div id="messages"></div>
+    
+    <?!= getJS() ?>
+  </body>
+</html>
+
+

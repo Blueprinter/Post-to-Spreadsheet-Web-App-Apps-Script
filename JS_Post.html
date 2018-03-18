@@ -1,0 +1,98 @@
+<script>
+  window.postToSheet = function() {
+    var data,el,ssID;
+    
+    pleaseWait();
+    
+    data = {};
+    
+    ssID = gid("whichSS").value;
+    cl("ssID",ssID)
+    
+    if (!ssID) {
+      el = gid("messages");
+      el.textContent = "Please Choose a Spreadsheet to Save To!";
+      el.style.color = "red";
+      
+      showReducedVw();
+      
+      return;
+    }
+    
+    data.ssID = ssID;
+    data.post = gid("idPost").value;
+    data.link = gid("idLink").value;
+    data.keywords = gid("idKeyWords").value;
+
+    cl(JSON.stringify(data))
+    
+    google.script.run
+      .withSuccessHandler(hadSuccess)
+      .makePost(data);
+  }
+
+  window.gid = function(id) {
+  
+    return document.getElementById(id);
+  }
+  
+  window.hadSuccess = function(rtrn) {
+    var el;
+    
+    cl('had success',rtrn);
+    
+    el = gid("messages");
+    el.textContent = rtrn;
+    el.style.color = "green";
+
+    showReducedVw();
+  }
+  
+  window.pleaseWait = function() {
+    var el,elContent;
+    
+    elContent = gid("idContent");
+    elContent.style.display = "none";
+    
+    cl('please','wait');
+    
+    el = gid("messages");
+    el.textContent = "Please Wait";
+    el.style.color = "blue";
+  }
+  
+  window.cl = function(a,b) {
+    console.log(a + " : " + b);
+  
+  }
+  
+  window.showReducedVw = function() {
+    var elReducedVw;
+    elReducedVw = gid("idReducedView");
+    elReducedVw.style.display = "block";
+  }
+  
+  window.hideReducedVw = function() {
+    var elReducedVw;
+    elReducedVw = gid("idReducedView");
+    elReducedVw.style.display = "none";
+  }
+  
+  window.showInput = function() {
+    var el;
+    el = gid("idContent");
+    el.style.display = "block";
+    hideReducedVw();
+    blankMessage();
+  }
+  
+  window.blankMessage = function() {
+    var el;
+    el = gid("messages");
+    el.textContent = "";
+    el.style.color = "black";
+  
+  }
+</script>
+
+
